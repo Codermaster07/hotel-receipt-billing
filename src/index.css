@@ -1,0 +1,578 @@
+@import "tailwindcss";
+
+/* ─── CSS Variables & Base ──────────────────────────────────────── */
+:root {
+  --color-primary: #6366f1;
+  --color-primary-hover: #818cf8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #020617;
+  color: #e2e8f0;
+}
+
+/* ─── Custom Scrollbar ──────────────────────────────────────────── */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ─── Form Sections ─────────────────────────────────────────────── */
+.form-section {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease;
+}
+.form-section:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+  letter-spacing: 0.02em;
+}
+.section-title svg {
+  color: #818cf8;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.form-input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 13px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  border-radius: 10px;
+  color: #e2e8f0;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.form-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background: rgba(15, 23, 42, 0.8);
+}
+.form-input::placeholder {
+  color: #475569;
+}
+
+select.form-input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding-right: 36px;
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.form-error {
+  font-size: 11px;
+  color: #f87171;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+@media (max-width: 640px) {
+  .col-span-2 {
+    grid-column: span 1 / span 1;
+  }
+}
+
+/* ─── Action Buttons ────────────────────────────────────────────── */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+.action-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #818cf8, #a78bfa);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  transform: translateY(-1px);
+}
+
+.action-btn-success {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: white;
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+.action-btn-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px);
+}
+
+.action-btn-secondary {
+  background: rgba(51, 65, 85, 0.5);
+  color: #cbd5e1;
+  border-color: rgba(51, 65, 85, 0.6);
+}
+.action-btn-secondary:hover:not(:disabled) {
+  background: rgba(51, 65, 85, 0.8);
+  color: white;
+}
+
+.action-btn-outline {
+  background: transparent;
+  color: #818cf8;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+.action-btn-outline:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   BILL PREVIEW — Professional Hotel Invoice Styles
+   ═══════════════════════════════════════════════════════════════════ */
+
+/*
+  Structure:
+  .bill-page         → A4 white page with safe printing margins
+    .bill-border     → Thin professional border inside the margins
+      [content]      → All bill sections with internal padding
+*/
+
+.bill-page {
+  width: 794px;           /* A4 at 96dpi */
+  min-height: 1123px;     /* A4 at 96dpi */
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 11.5px;
+  line-height: 1.55;
+  margin: 0 auto;
+  /* Safe outer margins: ~17mm top/bottom, ~16mm left/right at 96dpi */
+  padding: 64px 60px 60px 60px;
+}
+
+.bill-border {
+  border: 1.5px solid #1a1a1a;
+  padding: 28px 30px 24px 30px;
+  min-height: calc(1123px - 124px); /* fill the page minus outer padding */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────── */
+.bill-header {
+  text-align: center;
+  padding-bottom: 12px;
+}
+
+.bill-hotel-name {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.bill-hotel-address {
+  font-size: 10px;
+  color: #555555;
+  margin-top: 6px;
+  line-height: 1.5;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bill-hotel-contact {
+  font-size: 10px;
+  color: #444444;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ─── Separators ─────────────────────────────────────────────────── */
+.bill-separator {
+  border: none;
+  border-top: 1px solid #cccccc;
+  margin: 14px 0;
+}
+
+.bill-separator-thick {
+  border: none;
+  border-top: 2px solid #1a1a1a;
+  margin: 12px 0 14px 0;
+}
+
+/* ─── Invoice Title Row ──────────────────────────────────────────── */
+.bill-invoice-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.bill-invoice-label {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+.bill-invoice-id {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+}
+
+/* ─── Two-Column Layout ──────────────────────────────────────────── */
+.bill-two-col {
+  display: flex;
+  gap: 24px;
+}
+
+.bill-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Section Label ──────────────────────────────────────────────── */
+.bill-section-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #666666;
+  margin-bottom: 8px;
+}
+
+/* ─── Info Tables (Guest / Booking) ──────────────────────────────── */
+.bill-info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bill-info-table td {
+  padding: 2.5px 0;
+  vertical-align: top;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.bill-info-label {
+  color: #777777;
+  font-weight: 500;
+  width: 100px;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+.bill-info-value {
+  color: #222222;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.bill-info-value-bold {
+  font-weight: 700;
+  font-size: 12px;
+  color: #111111;
+}
+
+/* ─── Billing Table ──────────────────────────────────────────────── */
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 4px;
+}
+
+.bill-th {
+  background: #f3f4f6;
+  border-top: 1.5px solid #1a1a1a;
+  border-bottom: 1.5px solid #1a1a1a;
+  padding: 7px 10px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #333333;
+}
+
+.bill-th-left  { text-align: left; }
+.bill-th-center { text-align: center; }
+.bill-th-right { text-align: right; }
+
+.bill-td {
+  padding: 6px 10px;
+  font-size: 11px;
+  color: #333333;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.bill-td-center { text-align: center; }
+.bill-td-right  { text-align: right; }
+.bill-td-bold   { font-weight: 600; color: #111111; }
+
+/* ─── Totals Block ───────────────────────────────────────────────── */
+.bill-totals-row {
+  display: flex;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.bill-totals-spacer {
+  flex: 1;
+}
+
+.bill-totals-block {
+  width: 260px;
+}
+
+.bill-total-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 11px;
+  color: #444444;
+}
+
+.bill-total-line span:last-child {
+  font-weight: 600;
+  color: #222222;
+  text-align: right;
+}
+
+.bill-grand-total-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0 4px 0;
+  margin-top: 4px;
+  border-top: 2px solid #1a1a1a;
+  font-size: 14px;
+  font-weight: 800;
+  color: #111111;
+}
+
+/* ─── Amount in Words ────────────────────────────────────────────── */
+.bill-words {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  font-size: 10.5px;
+  color: #444444;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.bill-words-label {
+  font-weight: 700;
+  color: #333333;
+}
+
+/* ─── Payment Grid ───────────────────────────────────────────────── */
+.bill-payment-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 4px;
+}
+
+.bill-payment-item {
+  padding: 7px 10px;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bill-payment-item:last-child {
+  border-right: none;
+}
+
+.bill-payment-label {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #888888;
+}
+
+.bill-payment-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222222;
+}
+
+/* ─── Notes Block ────────────────────────────────────────────────── */
+.bill-notes-block {
+  margin-bottom: 4px;
+}
+
+.bill-note-item {
+  font-size: 9.5px;
+  color: #666666;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.bill-note-label {
+  font-weight: 700;
+  color: #555555;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────── */
+.bill-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #cccccc;
+  text-align: center;
+}
+
+.bill-thank-you {
+  font-size: 11px;
+  font-weight: 600;
+  color: #333333;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.bill-computer-gen {
+  font-size: 9px;
+  color: #999999;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════════════════════════════════ */
+@media print {
+  /* Hide everything except the bill */
+  body * {
+    visibility: hidden;
+  }
+  #bill-preview,
+  #bill-preview * {
+    visibility: visible;
+  }
+
+  #bill-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 17mm 16mm 17mm 16mm;
+    box-shadow: none !important;
+    margin: 0;
+  }
+
+  .bill-border {
+    min-height: calc(297mm - 34mm);
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  /* Ensure clean B&W printing */
+  .bill-page,
+  .bill-border,
+  .bill-th,
+  .bill-words,
+  .bill-payment-grid,
+  .bill-payment-item {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
