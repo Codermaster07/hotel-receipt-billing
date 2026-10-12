@@ -47,11 +47,15 @@ export default function BillPreview({ bill }: Props) {
             HEADER
         ═══════════════════════════════════════════════════════════ */}
         <div className="bill-header">
-          <h1 className="bill-hotel-name">{hotel.name}</h1>
-          <p className="bill-hotel-address">{hotel.address}</p>
-          <p className="bill-hotel-contact">
-            Phone: {hotel.phones.join(' / ')} &nbsp;|&nbsp; Email: {hotel.email}
-          </p>
+          <h1 className="bill-hotel-name">{hotel.name || 'Codecrax Stay'}</h1>
+          {hotel.address && <p className="bill-hotel-address">{hotel.address}</p>}
+          {(hotel.phones?.some(Boolean) || hotel.email) && (
+            <p className="bill-hotel-contact">
+              {hotel.phones?.filter(Boolean).length > 0 && `Phone: ${hotel.phones.filter(Boolean).join(' / ')}`}
+              {hotel.phones?.filter(Boolean).length > 0 && hotel.email && ' \u00A0|\u00A0 '}
+              {hotel.email && `Email: ${hotel.email}`}
+            </p>
+          )}
         </div>
 
         <div className="bill-separator-thick" />

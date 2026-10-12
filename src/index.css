@@ -263,9 +263,10 @@ textarea.form-input {
   color: #555555;
   margin-top: 6px;
   line-height: 1.5;
-  max-width: 480px;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
+  white-space: pre-line;
 }
 
 .bill-hotel-contact {

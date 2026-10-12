@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import type {
   BillData,
+  HotelInfo,
   GuestInfo,
   BookingInfo,
   BillingItem,
@@ -17,6 +18,7 @@ import { generatePDF, printBill } from './utils/pdfGenerator';
 import { saveBill as saveBillToStorage, loadBills, deleteBill as deleteBillFromStorage, searchBills } from './utils/storage';
 import { createDefaultBillData, DEFAULT_HOTEL, getDefaultGuest, getDefaultBooking, getDefaultRoom, getDefaultBillingItems, getDefaultTax, getDefaultDiscount, getDefaultPayment, getDefaultNotes, getDefaultCalculations } from './utils/defaults';
 
+import HotelForm from './components/HotelForm';
 import GuestForm from './components/GuestForm';
 import BookingForm from './components/BookingForm';
 import BillingItems from './components/BillingItems';
@@ -64,6 +66,14 @@ export default function App() {
       });
     },
     [recalculate]
+  );
+
+  // ─── Hotel / Stay Handlers ───────────────────────────────────────
+  const handleHotelChange = useCallback(
+    (hotel: HotelInfo) => {
+      updateBill((prev) => ({ ...prev, hotel }));
+    },
+    [updateBill]
   );
 
   // ─── Guest Handlers ──────────────────────────────────────────────
@@ -234,6 +244,7 @@ export default function App() {
 
     const newBookingId = getNextBookingId();
     const newBill = createDefaultBillData();
+    newBill.hotel = { ...bill.hotel };
     newBill.guest = { ...getDefaultGuest(), name: '', mobile: '', email: '', address: '', idNumber: '', companyName: '' };
     newBill.booking = { ...getDefaultBooking(), bookingId: newBookingId };
     newBill.billingItems = getDefaultBillingItems();
@@ -379,6 +390,7 @@ export default function App() {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* ─── LEFT: Form ─── */}
           <div className={`w-full lg:w-[520px] xl:w-[560px] flex-shrink-0 space-y-4 ${showMobilePreview ? 'hidden lg:block' : ''}`}>
+            <HotelForm hotel={bill.hotel} onChange={handleHotelChange} />
             <BookingForm
               booking={bill.booking}
               onChange={handleBookingChange}
